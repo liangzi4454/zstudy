@@ -49,7 +49,7 @@ public class RedisClient {
 		// config.setMaxWait(1000l);
 		config.setTestOnBorrow(false);
 
-		jedisPool = new JedisPool(config, "192.168.79.129", 6379);
+		jedisPool = new JedisPool(config, "192.168.64.132", 6379);
 	}
 
 	private void initialShardedPool() {
@@ -64,9 +64,15 @@ public class RedisClient {
 
 		// slave链接
 		List<JedisShardInfo> shareds = new ArrayList<JedisShardInfo>();
-		shareds.add(new JedisShardInfo("192.168.79.129", 6379, "master"));
+		shareds.add(new JedisShardInfo("192.168.64.132", 6379, "master"));
 
 		shardedJedisPool = new ShardedJedisPool(config, shareds);
+	}
+	
+	public void operate() {
+//		System.out.println("清空库中所有数据：" + jedis.flushDB());
+		System.out.println("新增key001,value001键值对：" + shardedJedis.set("key001", "value0001"));
+//		System.out.println("设置 key001的过期时间为5秒:" + jedis.expire("key001", 30));
 	}
 
 	/*

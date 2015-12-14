@@ -3,7 +3,7 @@ package cn.com.stuty.redis;
 import org.junit.Test;
 
 import redis.clients.jedis.Jedis;
-import cn.com.study.redis.RedisJava;
+import cn.com.study.redis.example.RedisJava;
 
 public class RedisJavaTest {
 	@Test

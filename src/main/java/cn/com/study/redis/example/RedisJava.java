@@ -1,4 +1,4 @@
-package cn.com.study.redis;
+package cn.com.study.redis.example;
 
 import java.util.Iterator;
 import java.util.List;

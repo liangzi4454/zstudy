@@ -1,4 +1,4 @@
-package cn.com.study.redis;
+package cn.com.study.redis.example;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -42,11 +42,11 @@ public class RedisClient {
 	private void initialPool() {
 		// 池基本配置
 		JedisPoolConfig config = new JedisPoolConfig();
-		config.setMaxTotal(20);
 		// config.setMaxActive(20);
+		config.setMaxTotal(20);
 		config.setMaxIdle(5);
-		config.setMaxWaitMillis(1000l);
 		// config.setMaxWait(1000l);
+		config.setMaxWaitMillis(1000l);
 		config.setTestOnBorrow(false);
 
 		jedisPool = new JedisPool(config, "192.168.64.132", 6379);

@@ -27,8 +27,7 @@ public class RedisClient {
 	private ShardedJedisPool shardedJedisPool;
 
 	private RedisClient() {
-		if (jedis == null || jedisPool == null || shardedJedis == null
-				|| shardedJedisPool == null) {
+		if (jedis == null || jedisPool == null || shardedJedis == null || shardedJedisPool == null) {
 			initialPool();
 			initialShardedPool();
 			shardedJedis = shardedJedisPool.getResource();
@@ -49,7 +48,7 @@ public class RedisClient {
 		config.setMaxWaitMillis(1000l);
 		config.setTestOnBorrow(false);
 
-		jedisPool = new JedisPool(config, "192.168.64.132", 6379);
+		jedisPool = new JedisPool(config, "192.168.79.128", 6379);
 	}
 
 	private void initialShardedPool() {
@@ -64,21 +63,33 @@ public class RedisClient {
 
 		// slave链接
 		List<JedisShardInfo> shareds = new ArrayList<JedisShardInfo>();
-		shareds.add(new JedisShardInfo("192.168.64.132", 6379, "master"));
+		shareds.add(new JedisShardInfo("192.168.79.128", 6379, "master"));
+		shareds.add(new JedisShardInfo("192.168.79.129", 6379, "slave1"));
+		shareds.add(new JedisShardInfo("192.168.79.131", 6379, "slave2"));
 
 		shardedJedisPool = new ShardedJedisPool(config, shareds);
 	}
 	
-	public void operate() {
-//		System.out.println("清空库中所有数据：" + jedis.flushDB());
-		System.out.println("新增key001,value001键值对：" + shardedJedis.set("key001", "value0001"));
-//		System.out.println("设置 key001的过期时间为5秒:" + jedis.expire("key001", 30));
-	}
-
-	/*
-	 * public void show() { jedisPool.returnResource(jedis);
-	 * shardedJedisPool.returnResource(shardedJedis); }
+	/**
+	 * 操作非分片数据库;
+	 * 当调用jedis.close();将关闭连接池
 	 */
+	public void operateJedis() {
+		System.out.println(jedis.set("key01", "value01"));
+		jedis.close();
+	}
+	
+	/**
+	 * 分片操作数据库;
+	 * 当调用shardedJedis.close();将关闭连接池
+	 */
+	public void operateShardedJedis() {
+//		System.out.println("清空库中所有数据：" + jedis.flushDB());
+		for(int index=0; index<100; index++) {
+			System.out.println("新增key,value键值对：" + shardedJedis.set(String.valueOf(index), "LHY-"+index));
+		}
+//		shardedJedis.close();
+	}
 
 	public void KeyOperate() {
 		System.out.println("======================key==========================");
@@ -117,6 +128,7 @@ public class RedisClient {
 		 * 一些其他方法：1、修改键名：jedis.rename("key6", "key0");
 		 * 2、将当前db的key移动到给定的db当中：jedis.move("foo", 1)
 		 */
+		jedis.close();
 	}
 
 	public void StringOperate() {

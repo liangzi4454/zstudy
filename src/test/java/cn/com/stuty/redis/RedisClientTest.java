@@ -7,9 +7,9 @@ import cn.com.study.redis.example.RedisClient;
 /**
  * ubuntu 下安装redis
  * <p>
- * 1.在Download目录中执行命令:wget http://download.redis.io/releases/redis-2.8.12.tar.gz 下载redis;<br>
- * 2.当前目录执行命令  tar zxvf redis-2.8.12.tar.gz 解压到当前目录;<br>
- * 3.当前目录执行命令 mv redis-2.8.12 /usr/local/ && cd /usr/local/redis-2.8.12 将解压出来的redis文件移动到该目录并跳转到该目录;<br>
+ * 1.在Download目录中执行命令:wget http://download.redis.io/releases/redis-3.0.5.tar.gz 下载redis;<br>
+ * 2.当前目录执行命令  tar zxvf redis-3.0.5.tar.gz 解压到当前目录;<br>
+ * 3.当前目录执行命令 mv redis-3.0.5 /usr/local/ && cd /usr/local/redis-3.0.5 将解压出来的redis文件移动到该目录并跳转到该目录;<br>
  * 4.执行命令:sudo make 进行编译;
  * 5.执行命令:sudo make install 安装;<br>
  * 6.启动 server 当前目录执行命令:src/redis-server;<br>
@@ -28,8 +28,10 @@ import cn.com.study.redis.example.RedisClient;
 public class RedisClientTest {
 	@Test
 	public void KeyOperate() {
-//		RedisClient.instance.operate();
+		RedisClient.instance.operateShardedJedis();
+		
+//		RedisClient.instance.operateJedis();
 //		RedisClient.instance.KeyOperate();
-		RedisClient.instance.SetOperate();
+//		RedisClient.instance.SetOperate();
 	}
 }

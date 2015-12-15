@@ -30,8 +30,7 @@ import redis.clients.jedis.Tuple;
  */
 @Repository("redisClientTemplate")
 public class RedisClientTemplate {
-	private static final Logger log = LoggerFactory
-			.getLogger(RedisClientTemplate.class);
+	private static final Logger log = LoggerFactory.getLogger(RedisClientTemplate.class);
 
 	@Resource
 	private RedisDataSource redisDataSource;

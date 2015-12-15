@@ -11,7 +11,9 @@ public class RedisClientTemplateTest {
 	public void test() {
 		ApplicationContext context = new ClassPathXmlApplicationContext("classpath:/redis-datasource.xml");
 		RedisClientTemplate redisClient = (RedisClientTemplate)context.getBean("redisClientTemplate");
-		redisClient.set("a_b_c", "abc");
+		for(int i=0; i<10; i++) {
+			redisClient.set("a_b_c_"+i, "abc_"+i);
+		}
 		System.out.println(redisClient.get("a_b_c"));
 	}
 }

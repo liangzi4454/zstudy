@@ -26,24 +26,17 @@
 		<constructor-arg>
 			<list>
 				<bean class="redis.clients.jedis.JedisShardInfo">
-					<constructor-arg name="host" value="${redis.host}" />
-					<constructor-arg name="port" value="${redis.port}" />
+					<constructor-arg name="host" value="192.168.79.128" />
+					<constructor-arg name="port" value="6379" />
 					<!-- <constructor-arg name="name" value="instance:01" /> -->
 				</bean>
-				<!-- 
-				<bean class="redis.clients.jedis.JedisShardInfo">
-					<constructor-arg name="host" value="192.168.64.130" />
-					<constructor-arg name="port" value="6379" />
-					<constructor-arg name="name" value="instance:02" />
-				</bean>
-				
 				
 				<bean class="redis.clients.jedis.JedisShardInfo">
-					<constructor-arg name="host" value="192.168.64.130" />
-					<constructor-arg name="port" value="6379" />
-					<constructor-arg name="name" value="instance:03" />
+					<constructor-arg name="host" value="192.168.79.128" />
+					<constructor-arg name="port" value="6380" />
+					<!-- <constructor-arg name="name" value="instance:02" /> -->
 				</bean>
-				 -->
+				
 			</list>
 		</constructor-arg>
 	</bean>

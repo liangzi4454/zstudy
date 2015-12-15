@@ -7,7 +7,7 @@
 	xsi:schemaLocation="  
             http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd  
             http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
-	
+	<!-- 由于spring-redis结合不够强大,所以弃用这种调用方式 -->
 	<context:property-placeholder location="classpath:redis.properties" />
 	<context:component-scan base-package="cn.com.study.redis"/>
 	<bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">

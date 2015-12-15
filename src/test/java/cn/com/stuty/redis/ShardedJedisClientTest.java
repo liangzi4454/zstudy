@@ -10,6 +10,8 @@ public class ShardedJedisClientTest {
 //		ShardedJedisClient.instance.KeyOperate();
 //		ShardedJedisClient.instance.StringOperate();
 //		ShardedJedisClient.instance.ListOperate();
-		ShardedJedisClient.instance.SortedSetOperate();
+//		ShardedJedisClient.instance.SortedSetOperate();
+		
+		ShardedJedisClient.instance.operateShardedJedis();
 	}
 }

@@ -8,9 +8,13 @@ import redis.clients.jedis.JedisShardInfo;
 import redis.clients.jedis.ShardedJedis;
 import redis.clients.jedis.ShardedJedisPool;
 import redis.clients.jedis.SortingParams;
+import redis.clients.util.Hashing;
+import redis.clients.util.Sharded;
 
 /**
- * 切片操作
+ * 切片操作(集群),3.0开始<br>
+ * 目前Redis3.0实现集群的方法主要是采用一致性哈稀分片（Shard），将不同的key分配到不同的redis server上，达到横向扩展的目的<br>
+ * 客户端jedis的一致性哈稀进行分片原理：初始化ShardedJedisPool的时候，会将上面程序中的jdsInfoList数据进行一个算法技术，主要计算依据为list中的index位置来计算;
  * @author LHY
  * 2015年12月15日 下午3:17:24
  */
@@ -43,12 +47,24 @@ public class ShardedJedisClient {
 		// slave链接
 		List<JedisShardInfo> shareds = new ArrayList<JedisShardInfo>();
 		shareds.add(new JedisShardInfo("192.168.79.128", 6379, "master"));
-//		shareds.add(new JedisShardInfo("192.168.79.128", 6380, "master1"));
+		shareds.add(new JedisShardInfo("192.168.79.128", 6380, "master1"));
 		
 //		shareds.add(new JedisShardInfo("192.168.79.129", 6379, "slave1"));
 //		shareds.add(new JedisShardInfo("192.168.79.131", 6379, "slave2"));
 
-		return new ShardedJedisPool(config, shareds);
+		return new ShardedJedisPool(config, shareds, Hashing.MURMUR_HASH, Sharded.DEFAULT_KEY_TAG_PATTERN);
+	}
+	
+	private static int index = 1;
+    public static String generateKey(){
+        return String.valueOf(Thread.currentThread().getId())+"_"+(index++);
+    }
+	
+	public void operateShardedJedis() {
+		for(int i=0; i<10; i++) {
+			shardedJedis.set(generateKey(), "LHY-"+i);
+		}
+		shardedJedis.close();
 	}
 	
 	/**

@@ -3,6 +3,7 @@ package cn.com.study.redis.example;
 import java.util.Iterator;
 import java.util.Set;
 
+import redis.clients.jedis.Client;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
@@ -33,6 +34,14 @@ public class RedisClient {
 		config.setTestOnBorrow(false);
 
 		return new JedisPool(config, "192.168.79.128", 6379);
+	}
+	
+	/**
+	 * 返回客户端
+	 * @return
+	 */
+	public Client getClient() {
+		return jedis.getClient();
 	}
 
 	/**

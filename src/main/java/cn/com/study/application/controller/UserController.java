@@ -25,8 +25,7 @@ public class UserController {
 	public void setUserService(UserService userService) {
 		this.userService = userService;
 	}
-
-	// http://localhost:8085/user_cms/userController/1/showUser
+	
 	@RequestMapping("/{id}/showUser")
 	public String showUser(@PathVariable String id, ModelMap modelMap, HttpServletRequest request) {
 		UserEntity u = userService.getUserEntityById(id);
@@ -39,8 +38,7 @@ public class UserController {
 		modelMap.put("user", u);
 		return "/user/list";
 	}
-
-	// http://localhost:8085/user_cms/userController/showUser?id=1
+	
 	@RequestMapping("showUser")
 	public String showUserEntity(String id, ModelMap modelMap, HttpServletRequest request) {
 		UserEntity u = userService.getUserEntityById(id);
@@ -52,7 +50,7 @@ public class UserController {
 		modelMap.put("user", u);
 		return "/user/list";
 	}
-
+	
 	@RequestMapping("/showUserExample")
 	public String showUsers(Model model) {
 		return "redirect:/1/showUser";

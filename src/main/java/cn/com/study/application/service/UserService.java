@@ -5,9 +5,9 @@ import java.util.List;
 import cn.com.study.application.model.UserEntity;
 
 public interface UserService {
-	UserEntity getUserEntityById(String userId);
+	public UserEntity getUserEntityById(String userId);
 	
-	List<UserEntity> getUserEntities();
+	public List<UserEntity> getUserEntities();
 	
-	UserEntity insertUserEntity(UserEntity userEntity);
+	public UserEntity insertUserEntity(UserEntity userEntity);
 }

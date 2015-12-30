@@ -8,14 +8,12 @@
 		<property name="location" value="/WEB-INF/spring/servlet/velocity-config.properties" />
 	</bean> -->
 	
-	<!-- 设置模板放置位置 -->
+	<!-- 在spring中设置Velocity引擎,通过属性resourceLoaderPath告诉Velocity到哪里寻找它的模板。 -->
 	<bean id="velocityConfigurer" class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
 		<property name="resourceLoaderPath" value="/WEB-INF/template/velocity/" />
 		<property name="configLocation" value="/WEB-INF/spring/servlet/velocity-config.properties"/>
 		<property name="velocityProperties">
 			<props>
-				<!-- <prop key="directive.foreach.counter.name">loopCounter</prop>
-				<prop key="directive.foreach.counter.initial.value">0</prop> -->
 				<prop key="input.encoding">UTF-8</prop><!-- 指定模板引擎进行模板处理的编码 -->
 				<prop key="output.encoding">UTF-8</prop><!-- 指定输出流的编码 -->
 			</props>

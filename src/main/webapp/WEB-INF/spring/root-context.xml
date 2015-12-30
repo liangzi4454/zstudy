@@ -4,14 +4,14 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 	<!-- 设置velocity的配置文件路径 -->
-	<bean id="velocityConfiguration" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+	<!-- <bean id="velocityConfiguration" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
 		<property name="location" value="/WEB-INF/spring/servlet/velocity-config.properties" />
-	</bean>
+	</bean> -->
 	
 	<!-- 设置模板放置位置 -->
 	<bean id="velocityConfigurer" class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
+		<property name="resourceLoaderPath" value="/WEB-INF/template/velocity/" />
 		<property name="configLocation" value="/WEB-INF/spring/servlet/velocity-config.properties"/>
-		<property name="resourceLoaderPath" value="/WEB-INF/velocity/" />
 		<property name="velocityProperties">
 			<props>
 				<!-- <prop key="directive.foreach.counter.name">loopCounter</prop>
@@ -20,5 +20,18 @@
 				<prop key="output.encoding">UTF-8</prop><!-- 指定输出流的编码 -->
 			</props>
 		</property>
+	</bean>
+	
+	<!-- 设置视图解析工具 -->
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.velocity.VelocityViewResolver">
+		<property name="cache" value="true"/>
+		<property name="prefix" value=""/>
+		<property name="suffix" value=".vm"/>
+		<property name="contentType" value="text/html;charset=UTF-8"/>
+		<!-- 下边的配置暂时不知何用 -->
+		<property name="dateToolAttribute" value="dateTool"/>
+		<property name="numberToolAttribute" value="numberTool"/>
+		<property name="exposeRequestAttributes" value="true"/>
+		<property name="exposeSessionAttributes" value="true"/>
 	</bean>
 </beans>

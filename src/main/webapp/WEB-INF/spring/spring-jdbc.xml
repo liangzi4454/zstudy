@@ -38,8 +38,8 @@
 		</property>
 	</bean>
 
-	<!-- DAO接口所在包名，Spring会自动查找其下的类 -->
-	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+	<!-- Spring容器中配置mapper扫描器,DAO接口所在包名,Spring会自动查找其下的类 -->
+	<bean id="mapper" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="cn.com.study.application.mapper"/>
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
 	</bean>

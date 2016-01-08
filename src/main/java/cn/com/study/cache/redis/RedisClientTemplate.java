@@ -1,4 +1,4 @@
-package cn.com.study.redis;
+package cn.com.study.cache.redis;
 
 import java.util.Collection;
 import java.util.List;

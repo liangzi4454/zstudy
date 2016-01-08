@@ -1,4 +1,4 @@
-package cn.com.study.redis;
+package cn.com.study.cache.redis;
 
 import javax.annotation.Resource;
 

@@ -1,9 +1,9 @@
-package cn.com.stuty.redis;
+package cn.com.stuty.cache.redis;
 
 import org.junit.Test;
 
 import redis.clients.jedis.Jedis;
-import cn.com.study.redis.example.RedisJava;
+import cn.com.study.cache.redis.example.RedisJava;
 
 public class RedisJavaTest {
 	@Test

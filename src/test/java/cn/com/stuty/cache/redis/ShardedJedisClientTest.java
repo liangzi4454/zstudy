@@ -1,8 +1,8 @@
-package cn.com.stuty.redis;
+package cn.com.stuty.cache.redis;
 
 import org.junit.Test;
 
-import cn.com.study.redis.example.ShardedJedisClient;
+import cn.com.study.cache.redis.example.ShardedJedisClient;
 
 public class ShardedJedisClientTest {
 	@Test

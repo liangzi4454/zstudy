@@ -1,4 +1,4 @@
-package cn.com.study.redis.example;
+package cn.com.study.cache.redis.example;
 
 import java.util.ArrayList;
 import java.util.List;

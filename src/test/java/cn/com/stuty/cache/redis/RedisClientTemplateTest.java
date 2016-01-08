@@ -1,11 +1,11 @@
-package cn.com.stuty.redis;
+package cn.com.stuty.cache.redis;
 
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.web.context.support.XmlWebApplicationContext;
 
-import cn.com.study.redis.RedisClientTemplate;
+import cn.com.study.cache.redis.RedisClientTemplate;
 
 public class RedisClientTemplateTest {
 	@Test

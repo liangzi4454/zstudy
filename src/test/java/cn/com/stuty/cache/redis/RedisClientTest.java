@@ -1,8 +1,8 @@
-package cn.com.stuty.redis;
+package cn.com.stuty.cache.redis;
 
 import org.junit.Test;
 
-import cn.com.study.redis.example.RedisClient;
+import cn.com.study.cache.redis.example.RedisClient;
 
 /**
  * ubuntu 下安装redis

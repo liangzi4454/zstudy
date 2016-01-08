@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import cn.com.study.application.mapper.UserMapper;
 import cn.com.study.application.model.UserEntity;
@@ -30,7 +31,8 @@ public class UserServiceImpl implements UserService {
 	public List<UserEntity> getUserEntities() {
 		return this.userMapper.getUserEntities();
 	}
-
+	
+	@Transactional
 	public UserEntity insertUserEntity(UserEntity userEntity) {
 		this.userMapper.insertUser(userEntity);
 		return getUserEntityById(userEntity.getUserId());

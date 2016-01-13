@@ -3,6 +3,7 @@ package cn.com.stuty.cache.ehcache;
 import org.junit.Test;
 
 import cn.com.study.cache.ehcache.TableCache;
+import cn.com.study.top.base.TopUp;
 
 public class TableCacheTest {
 	@Test
@@ -12,5 +13,7 @@ public class TableCacheTest {
 		System.out.println(tableCache.upValue("table_name"));
 		tableCache.removeByKey("table_name");;
 		System.out.println(tableCache.upValue("table_name"));
+		
+		System.out.println(TopUp.upConfig("mailUser"));
 	}
 }

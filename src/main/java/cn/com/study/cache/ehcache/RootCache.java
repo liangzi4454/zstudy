@@ -17,7 +17,6 @@ public abstract class RootCache<K, V> extends TopBase implements IBaseCache {
 	public RootCache() {
 		CacheDefine cDefine = new CacheDefine();
 		String sClassNameString = this.getClass().getName();
-		System.out.println("缓存名称============================="+sClassNameString);
 		cache = cDefine.inCache(sClassNameString);
 	}
 

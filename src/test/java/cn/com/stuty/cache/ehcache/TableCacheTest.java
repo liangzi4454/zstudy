@@ -8,7 +8,6 @@ public class TableCacheTest {
 	@Test
 	public void testCache() {
 		TableCache tableCache = new TableCache();
-		tableCache.upOne("123");
 		tableCache.inElement("table_name", "user_t");
 		System.out.println(tableCache.upValue("table_name"));
 		tableCache.removeByKey("table_name");;

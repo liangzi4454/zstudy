@@ -67,4 +67,14 @@ public class UserController {
 		model.put("user", userService.getUserEntityById(id));
 		return "/user/detail";
 	}
+	@RequestMapping("/user/save")
+	public String save() {
+		UserEntity userEntity = new UserEntity();
+		userEntity.setEmail("1026163977@qq.com");
+		userEntity.setPassword("123");
+		userEntity.setSex("1");
+		userEntity.setUserName("LHY");
+		userService.insertUserEntity(userEntity);
+		return null;
+	}
 }

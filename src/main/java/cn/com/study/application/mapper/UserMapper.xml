@@ -4,15 +4,15 @@
 
 <mapper namespace="cn.com.study.application.mapper.UserMapper">
 	<resultMap id="userEntityMapper" type="userEntity">
-		<id property="userId" column="userId"/>
-		<result property="userName" column="userName"/>
+		<id property="userId" column="user_id"/>
+		<result property="userName" column="user_name"/>
 		<result property="password" column="password"/>
 		<result property="sex" column="sex"/>
 		<result property="email" column="email"/>
 	</resultMap>
 	
 	<select id="getUserEntityById" parameterType="String" resultMap="userEntityMapper">
-		select * from user where userid=#{param1}
+		select * from user where user_id=#{param1}
 	</select>
 	
 	<select id="getUserEntities" resultMap="userEntityMapper">
@@ -21,7 +21,7 @@
 	
 	<insert id="insertUser" parameterType="userEntity">
 		insert into
-		user(userId,userName,password,sex,email)
-		values(#{userEntity.userId},#{userEntity.userName},#{userEntity.password},#{userEntity.sex},#{userEntity.email})
+		user(user_id,user_name,password,sex,email)
+		values(#{userId},#{userName},#{password},#{sex},#{email})
 	</insert>
 </mapper>

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+                        http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+                        http://www.springframework.org/schema/context
+                        http://www.springframework.org/schema/context/spring-context-3.1.xsd
+                        http://www.springframework.org/schema/mvc
+                        http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+                        http://www.springframework.org/schema/tx
+                        http://www.springframework.org/schema/tx/spring-tx.xsd">
+	<!-- 引入配置文件 -->
+	<context:property-placeholder location="/WEB-INF/spring/servlet/jdbc.properties" />
+	<!-- 配置数据源 -->
+	<bean id="dataSourceFrom" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+		<property name="driverClass" value="${jdbc.driverClassName}"/>
+		<property name="jdbcUrl" value="${jdbc.url}"/>
+		<property name="user" value="${jdbc.username}"/>
+		<property name="password" value="${jdbc.password}"/>
+		<!-- 连接池中保留的最小连接数，默认为：3-->
+		<property name="minPoolSize" value="${c3p0.minPoolSize}"/>
+		<!-- 初始化连接池中的连接数，取值应在minPoolSize与maxPoolSize之间，默认为3-->
+		<property name="initialPoolSize" value="${c3p0.initialPoolSize}"/>
+		<!--连接池中保留的最大连接数。默认值: 15 -->
+		<property name="maxPoolSize" value="${c3p0.maxPoolSize}"/>
+		<!--最大空闲时间，60秒内未使用则连接被丢弃。若为0则永不丢弃。默认值: 0 -->  
+		<property name="maxIdleTime" value="${c3p0.maxIdleTime}"/>
+	</bean>
+	
+	<bean id="dataSourceTo" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+		<property name="driverClass" value="${jdbc.driverClassName}"/>
+		<property name="jdbcUrl" value="${jdbc.url}"/>
+		<property name="user" value="${jdbc.username}"/>
+		<property name="password" value="${jdbc.password}"/>
+		<!-- 连接池中保留的最小连接数，默认为：3-->
+		<property name="minPoolSize" value="${c3p0.minPoolSize}"/>
+		<!-- 初始化连接池中的连接数，取值应在minPoolSize与maxPoolSize之间，默认为3-->
+		<property name="initialPoolSize" value="${c3p0.initialPoolSize}"/>
+		<!--连接池中保留的最大连接数。默认值: 15 -->
+		<property name="maxPoolSize" value="${c3p0.maxPoolSize}"/>
+		<!--最大空闲时间，60秒内未使用则连接被丢弃。若为0则永不丢弃。默认值: 0 -->  
+		<property name="maxIdleTime" value="${c3p0.maxIdleTime}"/>
+	</bean>
+	<!-- 将DynamicDataSource Bean加入到Spring的上下文xml配置文件中去，同时配置DynamicDataSource的targetDataSources(多数据源目标)属性的Map映射。 -->
+	<bean id="dynamicDataSource" class="cn.com.study.db.dynamic.spring.DynamicDataSource" >
+	    <!-- 通过key-value的形式来关联数据源 -->
+	    <property name="targetDataSources">
+	        <map>
+	            <entry value-ref="dataSourceFrom" key="dataSourceFrom"/>
+	            <entry value-ref="dataSourceTo" key="dataSourceTo"/>
+	        </map>
+	    </property>
+	    <property name="defaultTargetDataSource" ref="dataSourceFrom" />
+	</bean>
+	
+	<!-- JdbcTemplate使用动态数据源的配置 -->  
+<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">  
+    <property name="dataSource">  
+        <ref bean="dynamicDataSource" />  
+    </property>  
+</bean>
+
+<!-- 对JdbcTemplate的应用封装类 -->  
+<bean id="sqlBaseDAO" class="com.whty.dao.BaseDAOImpl">  
+    <property name="jdbcTemplate">  
+        <ref bean="jdbcTemplate" />  
+    </property>  
+</bean>
+
+<bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">  
+    <!-- 和普通的dataSource用法一样 -->  
+    <property name="dataSource" ref="dynamicDataSource" />  
+    <property name="configLocations" value="classpath:hibernate.cfg.xml" />  
+    <property name="hibernateProperties">  
+        <props>  
+            <prop key="hibernate.dialect">${hibernate.dialect}</prop>     
+    </property>  
+</bean> 
+
+<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">  
+    <property name="dataSource" ref="dynamicDataSource" />  
+</bean>  
+  
+<bean id="sqlBaseDAOProxy" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">  
+    <property name="transactionManager" ref="transactionManager" />  
+    <property name="target" ref="sqlBaseDAO" />  
+    <property name="transactionAttributes">  
+        <props>  
+            <prop key="insert*">PROPAGATION_REQUIRED</prop>  
+            <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>  
+        </props>  
+    </property>  
+</bean> 
+
+<tx:annotation-driven transaction-manager="transactionManager"/>  
+  
+<bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">  
+    <property name="sessionFactory" ref="sessionFactory" />  
+</bean>  
+	<!-- 	
+	spring和MyBatis完美整合，不需要mybatis的配置映射文件
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"/>
+		<property name="configLocation" value="classpath:mybatis-config.xml" />
+		自动扫描mapping.xml文件
+		<property name="mapperLocations" value="classpath:cn/com/study/application/mapper/*.xml"/>
+		<property name="transactionFactory">
+			<bean class="org.apache.ibatis.transaction.managed.ManagedTransactionFactory" />
+		</property>
+	</bean>
+
+	Spring容器中配置mapper扫描器,DAO接口所在包名,Spring会自动查找其下的类
+	<bean id="mapper" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="cn.com.study.application.mapper"/>
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+	</bean>
+	
+	(事务管理)transaction manager, use JtaTransactionManager for global tx
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	<tx:annotation-driven transaction-manager="transactionManager" /> -->
+</beans>

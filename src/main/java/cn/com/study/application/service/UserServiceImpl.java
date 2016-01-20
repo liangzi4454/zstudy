@@ -32,9 +32,9 @@ public class UserServiceImpl implements UserService {
 		return this.userMapper.getUserEntities();
 	}
 	
-	@Transactional
+//	@Transactional
 	public UserEntity insertUserEntity(UserEntity userEntity) {
 		this.userMapper.insertUser(userEntity);
-		return getUserEntityById(userEntity.getUserId());
+		return userEntity;
 	}
 }

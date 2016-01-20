@@ -9,8 +9,8 @@ import javax.sql.DataSource;
 
 import org.junit.Test;
 
-import cn.com.study.db.DBPool;
-import cn.com.study.db.UsePoolBackedDataSource;
+import cn.com.study.db.dynamic.c3p0.DBPool;
+import cn.com.study.db.dynamic.c3p0.UsePoolBackedDataSource;
 
 public class DBPoolTest {
 	@Test

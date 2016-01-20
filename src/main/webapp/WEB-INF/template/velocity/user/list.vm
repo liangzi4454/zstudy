@@ -3,4 +3,5 @@
     #foreach($user in $users)
         <li><a href="user/${user.userId}">${user.email}</a> --> ${user.userName}</li>
     #end
+    <li><a href="user/save">创建</a></li>
 </ul>

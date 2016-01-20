@@ -1,4 +1,4 @@
-package cn.com.study.db;
+package cn.com.study.db.dynamic.c3p0;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 

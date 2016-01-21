@@ -39,6 +39,9 @@ public class UserServiceImpl implements UserService {
 	public UserEntity insertUserEntity(UserEntity userEntity) {
 		try {
 			Object obj = null;
+			DynamicDataSourceHolder.setRouteKey(DynamicDataSourceHolder.DATASOURCE1);
+			this.userMapper.insertUser(userEntity);
+			DynamicDataSourceHolder.setRouteKey(DynamicDataSourceHolder.DATASOURCE2);
 			this.userMapper.insertUser(userEntity);
 			throw new Exception("sssssssssssssss");
 		} catch (Exception e) {

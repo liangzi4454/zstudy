@@ -18,37 +18,28 @@
 	<!-- 引入配置文件 -->
 	<context:property-placeholder location="/WEB-INF/spring/servlet/jdbc.properties" />
 	<!-- 配置数据源 -->
-	<bean id="datasource1" class="com.mchange.v2.c3p0.ComboPooledDataSource"
-		destroy-method="close">
+	<bean id="abstractDataSource" abstract="true" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
 		<property name="driverClass" value="${jdbc.driverClassName}" />
+		<property name="user" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+		<!-- 连接池中保留的最小连接数，默认为：3 -->
+		<property name="minPoolSize" value="${c3p0.minPoolSize}" />
+		<!-- 初始化连接池中的连接数，取值应在minPoolSize与maxPoolSize之间，默认为3 -->
+		<property name="initialPoolSize" value="${c3p0.initialPoolSize}" />
+		<!--连接池中保留的最大连接数。默认值: 15 -->
+		<property name="maxPoolSize" value="${c3p0.maxPoolSize}" />
+		<!--最大空闲时间，60秒内未使用则连接被丢弃。若为0则永不丢弃。默认值: 0 -->
+		<property name="maxIdleTime" value="${c3p0.maxIdleTime}" />
+	</bean>
+	
+	<bean id="datasource1" parent="abstractDataSource">
 		<property name="jdbcUrl" value="${jdbc.url}" />
-		<property name="user" value="${jdbc.username}" />
-		<property name="password" value="${jdbc.password}" />
-		<!-- 连接池中保留的最小连接数，默认为：3 -->
-		<property name="minPoolSize" value="${c3p0.minPoolSize}" />
-		<!-- 初始化连接池中的连接数，取值应在minPoolSize与maxPoolSize之间，默认为3 -->
-		<property name="initialPoolSize" value="${c3p0.initialPoolSize}" />
-		<!--连接池中保留的最大连接数。默认值: 15 -->
-		<property name="maxPoolSize" value="${c3p0.maxPoolSize}" />
-		<!--最大空闲时间，60秒内未使用则连接被丢弃。若为0则永不丢弃。默认值: 0 -->
-		<property name="maxIdleTime" value="${c3p0.maxIdleTime}" />
 	</bean>
-
-	<bean id="datasource2" class="com.mchange.v2.c3p0.ComboPooledDataSource"
-		destroy-method="close">
-		<property name="driverClass" value="${jdbc.driverClassName}" />
+	
+	<bean id="datasource2" parent="abstractDataSource">
 		<property name="jdbcUrl" value="${jdbc.url2}" />
-		<property name="user" value="${jdbc.username}" />
-		<property name="password" value="${jdbc.password}" />
-		<!-- 连接池中保留的最小连接数，默认为：3 -->
-		<property name="minPoolSize" value="${c3p0.minPoolSize}" />
-		<!-- 初始化连接池中的连接数，取值应在minPoolSize与maxPoolSize之间，默认为3 -->
-		<property name="initialPoolSize" value="${c3p0.initialPoolSize}" />
-		<!--连接池中保留的最大连接数。默认值: 15 -->
-		<property name="maxPoolSize" value="${c3p0.maxPoolSize}" />
-		<!--最大空闲时间，60秒内未使用则连接被丢弃。若为0则永不丢弃。默认值: 0 -->
-		<property name="maxIdleTime" value="${c3p0.maxIdleTime}" />
 	</bean>
+	
 	<!-- 将DynamicDataSource Bean加入到Spring的上下文xml配置文件中去，同时配置DynamicDataSource的targetDataSources(多数据源目标)属性的Map映射。 -->
 	<bean id="dynamicDataSource" class="cn.com.study.db.dynamic.spring.DynamicDataSource">
 		<!-- 通过key-value的形式来关联数据源 -->

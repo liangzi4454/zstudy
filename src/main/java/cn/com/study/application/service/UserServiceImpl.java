@@ -32,7 +32,6 @@ public class UserServiceImpl implements UserService {
 	}
 
 	public List<UserEntity> getUserEntities() {
-		DynamicDataSourceHolder.setRouteKey(DynamicDataSourceHolder.DATASOURCE2);
 		return this.userMapper.getUserEntities();
 	}
 	
@@ -40,7 +39,6 @@ public class UserServiceImpl implements UserService {
 	public UserEntity insertUserEntity(UserEntity userEntity) {
 		try {
 			Object obj = null;
-			DynamicDataSourceHolder.setRouteKey(DynamicDataSourceHolder.DATASOURCE2);
 			this.userMapper.insertUser(userEntity);
 			throw new Exception("sssssssssssssss");
 		} catch (Exception e) {

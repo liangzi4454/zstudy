@@ -10,7 +10,7 @@ public class DynamicDataSourceHolder {
 	 * 
 	 * @return
 	 */
-	public static String getRouteKey() {
+	public static String getDataSource() {
 		return routeKey.get();
 	}
 
@@ -19,14 +19,14 @@ public class DynamicDataSourceHolder {
 	 * 
 	 * @param key
 	 */
-	public static void setRouteKey(String key) {
+	public static void setDataSource(String key) {
 		routeKey.set(key);
 	}
 
 	/**
 	 * 删除与当前线程绑定的数据源路由的key
 	 */
-	public static void removeRouteKey() {
+	public static void removeDataSource() {
 		routeKey.remove();
 	}
 }

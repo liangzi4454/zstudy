@@ -27,7 +27,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	public UserEntity getUserEntityById(int userId) {
-		DynamicDataSourceHolder.setRouteKey(DynamicDataSourceHolder.DATASOURCE1);
+		DynamicDataSourceHolder.setDataSource(DynamicDataSourceHolder.DATASOURCE1);
 		return this.userMapper.getUserEntityById(userId);
 	}
 
@@ -39,9 +39,9 @@ public class UserServiceImpl implements UserService {
 	public UserEntity insertUserEntity(UserEntity userEntity) {
 		try {
 			Object obj = null;
-			DynamicDataSourceHolder.setRouteKey(DynamicDataSourceHolder.DATASOURCE1);
+			DynamicDataSourceHolder.setDataSource(DynamicDataSourceHolder.DATASOURCE1);
 			this.userMapper.insertUser(userEntity);
-			DynamicDataSourceHolder.setRouteKey(DynamicDataSourceHolder.DATASOURCE2);
+			DynamicDataSourceHolder.setDataSource(DynamicDataSourceHolder.DATASOURCE2);
 			this.userMapper.insertUser(userEntity);
 			throw new Exception("sssssssssssssss");
 		} catch (Exception e) {

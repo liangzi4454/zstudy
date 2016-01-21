@@ -1,16 +1,16 @@
 package cn.com.study.application.model;
 
 public class UserEntity {
-	private String userId;
+	private int userId;
 	private String userName;
 	private String password;
 	private String sex;
 	private String email;
 	
-	public String getUserId() {
+	public int getUserId() {
 		return userId;
 	}
-	public void setUserId(String userId) {
+	public void setUserId(int userId) {
 		this.userId = userId;
 	}
 	public String getUserName() {

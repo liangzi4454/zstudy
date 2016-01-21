@@ -27,25 +27,23 @@ public class UserController {
 	}
 	
 	@RequestMapping("/{id}/showUser")
-	public String showUser(@PathVariable String id, ModelMap modelMap, HttpServletRequest request) {
+	public String showUser(@PathVariable int id, ModelMap modelMap, HttpServletRequest request) {
 		UserEntity u = userService.getUserEntityById(id);
 
 		if (u == null) {
 			u = new UserEntity();
 			u.setEmail("");
-			u.setUserId("");
 		}
 		modelMap.put("user", u);
 		return "/user/list";
 	}
 	
 	@RequestMapping("showUser")
-	public String showUserEntity(String id, ModelMap modelMap, HttpServletRequest request) {
+	public String showUserEntity(int id, ModelMap modelMap, HttpServletRequest request) {
 		UserEntity u = userService.getUserEntityById(id);
 		if (u == null) {
 			u = new UserEntity();
 			u.setEmail("");
-			u.setUserId("");
 		}
 		modelMap.put("user", u);
 		return "/user/list";
@@ -63,18 +61,18 @@ public class UserController {
 	}
 
 	@RequestMapping("/user/{id}")
-	public String detail(@PathVariable(value = "id") String id, ModelMap model) {
+	public String detail(@PathVariable(value = "id") int id, ModelMap model) {
 		model.put("user", userService.getUserEntityById(id));
 		return "/user/detail";
 	}
 	@RequestMapping("/user/save")
 	public String save() {
 		UserEntity userEntity = new UserEntity();
-		userEntity.setEmail("1026163977@qq.com");
+		userEntity.setEmail("liangzi4454@qq.com");
 		userEntity.setPassword("123");
 		userEntity.setSex("1");
-		userEntity.setUserName("LHY");
+		userEntity.setUserName("liangzi");
 		userService.insertUserEntity(userEntity);
-		return null;
+		return "/user/list";
 	}
 }

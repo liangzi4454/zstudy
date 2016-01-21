@@ -1,8 +1,8 @@
 package cn.com.study.db.dynamic.spring;
 
-public class RouteHolder {
-	public static final String DATA_SOURCE_FROM = "dataSourceFrom";
-	public static final String DATA_SOURCE_TO = "dataSourceTo";
+public class DynamicDataSourceHolder {
+	public static final String DATASOURCE1 = "datasource1";
+	public static final String DATASOURCE2 = "datasource2";
 	private static ThreadLocal<String> routeKey = new ThreadLocal<String>();
 	
 	/**

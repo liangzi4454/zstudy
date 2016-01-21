@@ -5,10 +5,12 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import cn.com.study.application.mapper.UserMapper;
 import cn.com.study.application.model.UserEntity;
+import cn.com.study.db.dynamic.spring.DynamicDataSourceHolder;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -24,17 +26,26 @@ public class UserServiceImpl implements UserService {
 		this.userMapper = userMapper;
 	}
 
-	public UserEntity getUserEntityById(String userId) {
+	public UserEntity getUserEntityById(int userId) {
+		DynamicDataSourceHolder.setRouteKey(DynamicDataSourceHolder.DATASOURCE1);
 		return this.userMapper.getUserEntityById(userId);
 	}
 
 	public List<UserEntity> getUserEntities() {
+		DynamicDataSourceHolder.setRouteKey(DynamicDataSourceHolder.DATASOURCE2);
 		return this.userMapper.getUserEntities();
 	}
 	
-//	@Transactional
+	@Transactional(readOnly = false, propagation=Propagation.REQUIRED)
 	public UserEntity insertUserEntity(UserEntity userEntity) {
-		this.userMapper.insertUser(userEntity);
+		try {
+			Object obj = null;
+			DynamicDataSourceHolder.setRouteKey(DynamicDataSourceHolder.DATASOURCE2);
+			this.userMapper.insertUser(userEntity);
+			throw new Exception("sssssssssssssss");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return userEntity;
 	}
 }

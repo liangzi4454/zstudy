@@ -5,7 +5,7 @@ import java.util.List;
 import cn.com.study.application.model.UserEntity;
 
 public interface UserMapper {
-	public UserEntity getUserEntityById(String userId);
+	public UserEntity getUserEntityById(int userId);
 	
 	public List<UserEntity> getUserEntities();
 	

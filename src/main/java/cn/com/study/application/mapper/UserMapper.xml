@@ -11,7 +11,7 @@
 		<result property="email" column="email"/>
 	</resultMap>
 	
-	<select id="getUserEntityById" parameterType="String" resultMap="userEntityMapper">
+	<select id="getUserEntityById" parameterType="Integer" resultMap="userEntityMapper">
 		select * from user where user_id=#{param1}
 	</select>
 	

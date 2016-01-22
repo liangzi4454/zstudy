@@ -11,7 +11,7 @@ import java.lang.annotation.Target;
 @Documented
 public @interface DataSource {
 	
-	String name() default DataSource.master;
+	String value() default DataSource.master;
 
 	public static String master = "dataSource1";
 

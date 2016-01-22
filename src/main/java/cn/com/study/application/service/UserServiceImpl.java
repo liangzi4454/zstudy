@@ -37,16 +37,7 @@ public class UserServiceImpl implements UserService {
 	
 	@Transactional(readOnly = false, propagation=Propagation.REQUIRED)
 	public UserEntity insertUserEntity(UserEntity userEntity) {
-		try {
-			Object obj = null;
-			DynamicDataSourceHolder.setDataSource(DynamicDataSourceHolder.DATASOURCE1);
-			this.userMapper.insertUser(userEntity);
-			DynamicDataSourceHolder.setDataSource(DynamicDataSourceHolder.DATASOURCE2);
-			this.userMapper.insertUser(userEntity);
-			throw new Exception("sssssssssssssss");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		this.userMapper.insertUser(userEntity);
 		return userEntity;
 	}
 }

@@ -20,5 +20,6 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	</settings>
 	<typeAliases>
 		<typeAlias alias="userEntity" type="cn.com.study.application.model.UserEntity"/>
+		<typeAlias alias="productCategory" type="cn.com.study.application.model.ProductCategory"/>
 	</typeAliases>
 </configuration>

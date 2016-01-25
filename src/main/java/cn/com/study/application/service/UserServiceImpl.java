@@ -40,4 +40,26 @@ public class UserServiceImpl implements UserService {
 		this.userMapper.insertUser(userEntity);
 		return userEntity;
 	}
+
+	@Override
+	public UserEntity get(int id) {
+		return null;
+	}
+
+	@Override
+	public void remove(UserEntity t) {
+	}
+
+	@Override
+	public void update(UserEntity t) {
+	}
+
+	@Override
+	public List<UserEntity> getList() {
+		return null;
+	}
+
+	@Override
+	public void insert(UserEntity t) {
+	}
 }

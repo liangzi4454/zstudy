@@ -1,0 +1,6 @@
+<h2>List of Feeds</h2>
+<ul>
+    #foreach($list in $list)
+        ${list.name} --> ${list.code}<br>
+    #end
+</ul>

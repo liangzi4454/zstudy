@@ -1,7 +1,9 @@
 package cn.com.study.application.model;
 
-public class BaseModel {
-	
+import java.io.Serializable;
+
+public class BaseModel implements Serializable {
+
 	protected int zid;
 	protected String uid;
 

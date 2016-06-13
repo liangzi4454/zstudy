@@ -286,7 +286,35 @@
 		<!-- end -->
 		
 		<!-- JTA事务需要的包 start -->
-		<!-- <dependency>
+		<!-- 
+		<dependency>
+		    <groupId>com.atomikos</groupId>
+		    <artifactId>atomikos-util</artifactId>
+		    <version>3.9.3</version>
+		</dependency>
+		<dependency>
+		    <groupId>com.atomikos</groupId>
+		    <artifactId>transactions-jdbc</artifactId>
+		    <version>3.9.3</version>
+		</dependency>
+		<dependency>
+			<groupId>com.atomikos</groupId>
+		    <artifactId>transactions-jta</artifactId>
+		    <version>3.9.3</version>
+		</dependency>
+		<dependency>
+		    <groupId>com.atomikos</groupId>
+		    <artifactId>transactions</artifactId>
+		    <version>3.9.3</version>
+		</dependency>
+		<dependency>
+			<groupId>com.atomikos</groupId>
+		    <artifactId>transactions-api</artifactId>
+		    <version>3.9.3</version>
+		</dependency>
+		 -->
+		<!--
+		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-dao</artifactId>
 			<version>2.0.8</version>
@@ -348,6 +376,7 @@
 			<artifactId>curator-test</artifactId>
 			<version>3.0.0</version>
 		</dependency> -->
+		
 		<!-- 以下三个无法从maven下载，需要单独下载jar包然后上传到本地库 -->
 		<!-- <dependency>
 			<groupId>jms</groupId>

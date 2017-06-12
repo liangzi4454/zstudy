@@ -45,9 +45,9 @@ public class DesignPatternTest {
 		subway.abstractCart = new SubwayTrain();
 		subway.run();
 		
-		AbstractRoad railway = new Railway();
+		/*AbstractRoad railway = new Railway();
 		railway.abstractCart = new RailwayTrain();
-		railway.run();
+		railway.run();*/
 	}
 	
 	/**

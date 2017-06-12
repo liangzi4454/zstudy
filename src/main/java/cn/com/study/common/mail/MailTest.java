@@ -3,10 +3,7 @@ package cn.com.study.common.mail;
 import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
 
-import org.junit.Test;
-
 public class MailTest {
-	@Test
 	public void testSend() {
 		MailSender mail = new MailSender(GlobalUtil.Host_NAME,GlobalUtil.MAIL_USER, GlobalUtil.MAIL_PWD);
 		Mail content = new Mail();

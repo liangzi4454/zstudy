@@ -1,9 +1,6 @@
 package cn.com.study.pattern.singleton;
 
-import org.junit.Test;
-
 public class SingletonTest {
-	@Test
 	public void testSingleton() {
 		Singleton.getInstance();
 	}

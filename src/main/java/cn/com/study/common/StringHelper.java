@@ -2,7 +2,6 @@ package cn.com.study.common;
 
 import java.util.UUID;
 
-import org.junit.Test;
 
 public class StringHelper {
 	/**
@@ -12,9 +11,5 @@ public class StringHelper {
 	public static final String uUid() {
 		return UUID.randomUUID().toString().replace("-", "");
 	}
-	
-	@Test
-	public void testStringHelper() {
-		System.out.println(uUid());
-	}
+
 }

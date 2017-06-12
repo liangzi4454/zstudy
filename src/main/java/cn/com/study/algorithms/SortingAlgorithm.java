@@ -1,7 +1,5 @@
 package cn.com.study.algorithms;
 
-import org.junit.Test;
-
 /**
  * 8个常用排序算法:插入排序、冒泡排序、选择排序、希尔排序 、快速排序、归并排序、堆排序、LST基数排序
  * 
@@ -44,7 +42,6 @@ public class SortingAlgorithm {
 		return a;
 	}
 
-	@Test
 	public void testSorting() {
 		int a[] = {1, 20, 10, 15, 6, 8};
 		a = insertSort(a);
